@@ -47,5 +47,6 @@
 	</build>
 	<modules>
 		<module>webservice</module>
+		<module>persistence</module>
 	</modules>
 </project>
