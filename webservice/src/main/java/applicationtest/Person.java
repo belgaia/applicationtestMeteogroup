@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Singleton
-@XmlRootElement
+@XmlRootElement(name="person")
 public class Person {
 
 	private String id;

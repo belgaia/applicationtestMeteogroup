@@ -65,42 +65,34 @@ public class TestMeteoGroupService {
 	
 	@Test
 	public void createNewPerson() {
-		ClientResponse response = service.path("meteogroup").path("person/").accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
+		Person person = new Person();
+		person.setFamilyName("Batista");
+		ClientResponse response = service.path("meteogroup").path("person").accept(MediaType.APPLICATION_XML).post(ClientResponse.class, person);
+		System.out.println("Status: " + response.getStatus());
 		
-		System.out.println(service.path("meteogroup").path("person/").accept(MediaType.APPLICATION_XML).get(ClientResponse.class).toString());
-		assertEquals(200, response.getClientResponseStatus().getStatusCode());
-	}
-	
-	
-	
-	
-	
-
-//	// FIXME: test is not green
-//	@Test
-//	public void getOnePersonById() throws Exception {
-//		// get id
-//		LOGGER.info("Test response of search by person id");
-//		Person givenPerson = createPersonOne();
-//		Person person = restTemplate.getForObject(
-//				BASE_URL + "/person/{id}", Person.class,
-//				givenPerson.getId());
-//		assertNotNull("no person", person);
-//		assertNotNull(person.getId());
-//		assertEquals(givenPerson.getFamilyName(), person.getFamilyName());
-//	}
-//
-//	private Person createPersonOne() {
+		if(response.hasEntity()) {
+			System.out.println("Has entity: " + response.getEntity(String.class));
+		} else {
+			System.out.println("Not reachable");
+		}
+		
+//		
 //		Person person = new Person();
-//		Calendar dateOfBirth = Calendar.getInstance();
-//		dateOfBirth.set(1985, 10, 24);
-//		person.setFamilyName("Rooney");
-//		person.setGivenName("Wayne");
-//		person.setMiddleNames("Mark");
-//		person.setDateOfDeath(null);
-//		person.setPlaceOfBirth("Liverpool");
-//		person.setHeight(1.76f);
-//		person.setTwitterId("@WayneRooney");
-//		return person;
-//	}
+//		person.setFamilyName("Batista");
+		Person createdPerson = service.path("meteogroup").path("person").type(MediaType.APPLICATION_XML).post(Person.class, person);
+//		ClientResponse response = service.path("meteogroup").path("person").type(MediaType.APPLICATION_XML).post(ClientResponse.class);
+		
+//		service.path("meteogroup").path("person").path("/").type(MediaType.APPLICATION_XML).post();
+		
+//		System.out.println("Reason: " + response.getEntity(String.class));
+		
+		
+		
+//		System.out.println(service.path("meteogroup").path("person").type(MediaType.APPLICATION_XML).post(ClientResponse.class));
+//		throw new UniformInterfaceException(response.getEntity(String.class));
+		
+//		System.out.println(service.path("meteogroup").path("person/").accept(MediaType.APPLICATION_XML).get(ClientResponse.class).toString());
+//		assertEquals(200, response.getClientResponseStatus().getStatusCode());
+		
+	}
 }

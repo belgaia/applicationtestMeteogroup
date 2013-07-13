@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<person>
+	<id>2</id>
+	<familyName>Cameron</familyName>
+	<givenName>David</givenName>
+	<middleNames>William Donald</middleNames>
+	<dateOfBirth>1966-10-09</dateOfBirth>
+	<dateOfDeath />
+	<placeOfBirth>London</placeOfBirth>
+	<height />
+	<twitterId>@Number10gov</twitterId>
+</person>

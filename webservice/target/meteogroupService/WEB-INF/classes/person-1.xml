@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<person>
+	<id>1</id>
+	<familyName>Rooney</familyName>
+	<givenName>Wayne</givenName>
+	<middleNames>Mark</middleNames>
+	<dateOfBirth>1985-10-24</dateOfBirth>
+	<dateOfDeath />
+	<placeOfBirth>Liverpool</placeOfBirth>
+	<height>1.76</height>
+	<twitterId>@WayneRooney</twitterId>
+</person>

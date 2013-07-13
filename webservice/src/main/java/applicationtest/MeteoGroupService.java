@@ -1,15 +1,30 @@
 package applicationtest;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.xml.bind.JAXBElement;
 
 import org.apache.log4j.Logger;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+
+import com.sun.jersey.api.client.ClientResponse;
 
 /**
  * RESTful service class for getting and posting person data.
@@ -18,7 +33,7 @@ import org.apache.log4j.Logger;
  */
 @Path("person")
 @Stateless
-public class MeteoGroupService {
+public class MeteoGroupService extends javax.ws.rs.core.Application {
 
 	@EJB
 	private Person person;
@@ -33,22 +48,31 @@ public class MeteoGroupService {
 	 */
 	// TODO: response has to be XML/JSON object not just the familyName
 	@GET
-	@Produces({"application/xml", "application/json"})
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/{id}")
 	public Person getPerson(@PathParam("id") String id) {
-		LOGGER.info("Has to be implemented.");
+		LOGGER.info("Get person with id: " + id);
+		
 		Person person = new Person();
-		person.setFamilyName("Mustermann");
+		
+		if (id.equals("1")) {
+			person.setFamilyName("Mustermann");
+		} else {
+			person.setFamilyName("Unknown");
+			ClientResponse.Status status = ClientResponse.Status.NOT_FOUND;
+		}
+		
 		return person;
 	}
 	
 	@POST
-	@Path("/")
-	@Produces(MediaType.APPLICATION_XML)
-	public Person createPerson() {
-		Person newPerson = new Person();
-		newPerson.setFamilyName("Batista");
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response createPerson(JAXBElement<Person> personXml) {
 		
-		return person;
-	}
+		Person generatedPerson = personXml.getValue();
+		GenericEntity<Person> entity = new GenericEntity<Person>(generatedPerson) {};
+		return Response.ok(entity).build();
+		
+	}	
 }

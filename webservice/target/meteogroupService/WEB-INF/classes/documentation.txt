@@ -1,0 +1,4 @@
+Using curl to test the POST method:
+
+curl -v -H "Content-Type: application/xml" -X POST --data "@persondata.xml" http:
+//localhost:8080/meteogroupService/meteogroup/person

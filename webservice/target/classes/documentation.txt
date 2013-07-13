@@ -1,0 +1,13 @@
+Using curl to test the POST method:
+
+Create the person data given with the exercise sheet
+
+curl -v -H "Content-Type: application/xml" -X POST --data "@person-1.xml" http://
+localhost:8080/meteogroupService/meteogroup/person
+
+curl -v -H "Content-Type: application/xml" -X POST --data "@person-2.xml" http://
+localhost:8080/meteogroupService/meteogroup/person
+
+curl -v -H "Content-Type: application/xml" -X POST --data "@person-3.xml" http://
+localhost:8080/meteogroupService/meteogroup/person
+

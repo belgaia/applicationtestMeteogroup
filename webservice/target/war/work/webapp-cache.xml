@@ -5,12 +5,18 @@
       <path-set>
         <pathsSet class="linked-hash-set">
           <string>WEB-INF/web.xml</string>
+          <string>WEB-INF/classes/applicationtest/MeteoGroupService$1.class</string>
           <string>WEB-INF/classes/applicationtest/MeteoGroupService.class</string>
           <string>WEB-INF/classes/applicationtest/Person.class</string>
+          <string>WEB-INF/classes/documentation.txt</string>
+          <string>WEB-INF/classes/person-1.xml</string>
+          <string>WEB-INF/classes/person-2.xml</string>
+          <string>WEB-INF/classes/person-3.xml</string>
           <string>WEB-INF/classes/person.xsd</string>
+          <string>WEB-INF/classes/persondata.xml</string>
+          <string>WEB-INF/classes/restclient.js</string>
           <string>WEB-INF/lib/jsr311-api-1.1.1.jar</string>
-          <string>WEB-INF/lib/javax.ejb-api-3.2.jar</string>
-          <string>WEB-INF/lib/javax.transaction-api-1.2.jar</string>
+          <string>WEB-INF/lib/jboss-ejb-api_3.1_spec-1.0.2.Final.jar</string>
           <string>WEB-INF/lib/spring-web-3.0.0.RELEASE.jar</string>
           <string>WEB-INF/lib/aopalliance-1.0.jar</string>
           <string>WEB-INF/lib/spring-beans-3.0.0.RELEASE.jar</string>
@@ -19,6 +25,21 @@
           <string>WEB-INF/lib/commons-logging-1.1.1.jar</string>
           <string>WEB-INF/lib/spring-context-3.0.0.RELEASE.jar</string>
           <string>WEB-INF/lib/spring-expression-3.0.0.RELEASE.jar</string>
+          <string>WEB-INF/lib/jersey-client-1.8.jar</string>
+          <string>WEB-INF/lib/jersey-core-1.8.jar</string>
+          <string>WEB-INF/lib/dom4j-1.6.1.jar</string>
+          <string>WEB-INF/lib/xml-apis-1.0.b2.jar</string>
+          <string>WEB-INF/lib/jersey-json-1.8.jar</string>
+          <string>WEB-INF/lib/jettison-1.1.jar</string>
+          <string>WEB-INF/lib/stax-api-1.0.1.jar</string>
+          <string>WEB-INF/lib/jaxb-impl-2.2.3-1.jar</string>
+          <string>WEB-INF/lib/jaxb-api-2.2.2.jar</string>
+          <string>WEB-INF/lib/stax-api-1.0-2.jar</string>
+          <string>WEB-INF/lib/activation-1.1.jar</string>
+          <string>WEB-INF/lib/jackson-core-asl-1.7.1.jar</string>
+          <string>WEB-INF/lib/jackson-mapper-asl-1.7.1.jar</string>
+          <string>WEB-INF/lib/jackson-jaxrs-1.7.1.jar</string>
+          <string>WEB-INF/lib/jackson-xc-1.7.1.jar</string>
           <string>WEB-INF/lib/log4j-1.2.17.jar</string>
         </pathsSet>
       </path-set>
@@ -39,15 +60,15 @@
     </org.apache.maven.plugin.war.util.DependencyInfo>
     <org.apache.maven.plugin.war.util.DependencyInfo>
       <dependency>
-        <groupId>javax.ejb</groupId>
-        <artifactId>javax.ejb-api</artifactId>
-        <version>3.2</version>
+        <groupId>org.jboss.spec.javax.ejb</groupId>
+        <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+        <version>1.0.2.Final</version>
         <type>jar</type>
         <scope>compile</scope>
         <exclusions/>
         <optional>false</optional>
       </dependency>
-      <targetFileName>javax.ejb-api-3.2.jar</targetFileName>
+      <targetFileName>jboss-ejb-api_3.1_spec-1.0.2.Final.jar</targetFileName>
     </org.apache.maven.plugin.war.util.DependencyInfo>
     <org.apache.maven.plugin.war.util.DependencyInfo>
       <dependency>
@@ -60,6 +81,42 @@
         <optional>false</optional>
       </dependency>
       <targetFileName>spring-web-3.0.0.RELEASE.jar</targetFileName>
+    </org.apache.maven.plugin.war.util.DependencyInfo>
+    <org.apache.maven.plugin.war.util.DependencyInfo>
+      <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-client</artifactId>
+        <version>1.8</version>
+        <type>jar</type>
+        <scope>compile</scope>
+        <exclusions/>
+        <optional>false</optional>
+      </dependency>
+      <targetFileName>jersey-client-1.8.jar</targetFileName>
+    </org.apache.maven.plugin.war.util.DependencyInfo>
+    <org.apache.maven.plugin.war.util.DependencyInfo>
+      <dependency>
+        <groupId>dom4j</groupId>
+        <artifactId>dom4j</artifactId>
+        <version>1.6.1</version>
+        <type>jar</type>
+        <scope>compile</scope>
+        <exclusions/>
+        <optional>false</optional>
+      </dependency>
+      <targetFileName>dom4j-1.6.1.jar</targetFileName>
+    </org.apache.maven.plugin.war.util.DependencyInfo>
+    <org.apache.maven.plugin.war.util.DependencyInfo>
+      <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-json</artifactId>
+        <version>1.8</version>
+        <type>jar</type>
+        <scope>compile</scope>
+        <exclusions/>
+        <optional>false</optional>
+      </dependency>
+      <targetFileName>jersey-json-1.8.jar</targetFileName>
     </org.apache.maven.plugin.war.util.DependencyInfo>
     <org.apache.maven.plugin.war.util.DependencyInfo>
       <dependency>

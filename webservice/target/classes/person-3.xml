@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<person>
+	<id>3</id>
+	<familyName>Jackson</familyName>
+	<givenName>Michael</givenName>
+	<middleNames>Joseph</middleNames>
+	<dateOfBirth>1958-08-29</dateOfBirth>
+	<dateOfDeath>2009-06-25</dateOfDeath>
+	<placeOfBirth>Indiana</placeOfBirth>
+	<height />
+	<twitterId>@michaeljackson</twitterId>
+</person>
