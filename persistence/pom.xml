@@ -6,4 +6,19 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>persistence</artifactId>
+  <packaging>jar</packaging>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>com.meteogroup</groupId>
+  		<artifactId>webservice</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	
+  	<dependency>
+		<groupId>org.mongodb</groupId>
+		<artifactId>mongo-java-driver</artifactId>
+		<version>2.10.1</version>
+	</dependency>
+  </dependencies>
 </project>

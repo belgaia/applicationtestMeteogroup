@@ -11,3 +11,4 @@ localhost:8080/meteogroupService/meteogroup/person
 curl -v -H "Content-Type: application/xml" -X POST --data "@person-3.xml" http://
 localhost:8080/meteogroupService/meteogroup/person
 
+
