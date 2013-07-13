@@ -3,9 +3,11 @@ package applicationtest;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 
@@ -37,6 +39,16 @@ public class MeteoGroupService {
 		LOGGER.info("Has to be implemented.");
 		Person person = new Person();
 		person.setFamilyName("Mustermann");
+		return person;
+	}
+	
+	@POST
+	@Path("/")
+	@Produces(MediaType.APPLICATION_XML)
+	public Person createPerson() {
+		Person newPerson = new Person();
+		newPerson.setFamilyName("Batista");
+		
 		return person;
 	}
 }
