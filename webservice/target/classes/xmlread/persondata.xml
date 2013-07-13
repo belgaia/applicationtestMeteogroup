@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persons>
+	<person>
+		<id>1</id>
+		<familyName>Rooney</familyName>
+		<givenName>Wayne</givenName>
+		<middleNames>Mark</middleNames>
+		<dateOfBirth>1985-10-24</dateOfBirth>
+		<dateOfDeath />
+		<placeOfBirth>Liverpool</placeOfBirth>
+		<height>1.76</height>
+		<twitterId>@WayneRooney</twitterId>
+	</person>
+
+	<person>
+		<id>2</id>
+		<familyName>Cameron</familyName>
+		<givenName>David</givenName>
+		<middleNames>William Donald</middleNames>
+		<dateOfBirth>1966-10-09</dateOfBirth>
+		<dateOfDeath />
+		<placeOfBirth>London</placeOfBirth>
+		<height />
+		<twitterId>@Number10gov</twitterId>
+	</person>
+
+	<person>
+		<id>3</id>
+		<familyName>Jackson</familyName>
+		<givenName>Michael</givenName>
+		<middleNames>Joseph</middleNames>
+		<dateOfBirth>1958-08-29</dateOfBirth>
+		<dateOfDeath>2009-06-25</dateOfDeath>
+		<placeOfBirth>Indiana</placeOfBirth>
+		<height />
+		<twitterId>@michaeljackson</twitterId>
+	</person>
+
+
+</persons>

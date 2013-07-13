@@ -30,7 +30,6 @@ public class MeteoGroupService {
 	 * @return XML or JSON request with detailed information about the person.
 	 */
 	// TODO: response has to be XML/JSON object not just the familyName
-	// FIXME: running in tomcat does not work properly (request of above URL brings up 404 error)
 	@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/{id}")
@@ -39,5 +38,5 @@ public class MeteoGroupService {
 		Person person = new Person();
 		person.setFamilyName("Mustermann");
 		return person;
-	}	
+	}
 }
