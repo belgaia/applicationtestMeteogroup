@@ -24,17 +24,17 @@ public class TestMeteoGroupService {
 	public void getOnePersonById() throws Exception {
 		// get id
 		LOGGER.info("Test response of search by person id");
-		PersonBean givenPerson = createPersonOne();
-		PersonBean person = restTemplate.getForObject(
-				BASE_URL + "/person/{id}", PersonBean.class,
+		Person givenPerson = createPersonOne();
+		Person person = restTemplate.getForObject(
+				BASE_URL + "/person/{id}", Person.class,
 				givenPerson.getId());
 		assertNotNull("no person", person);
 		assertNotNull(person.getId());
 		assertEquals(givenPerson.getFamilyName(), person.getFamilyName());
 	}
 
-	private PersonBean createPersonOne() {
-		PersonBean person = new PersonBean();
+	private Person createPersonOne() {
+		Person person = new Person();
 		Calendar dateOfBirth = Calendar.getInstance();
 		dateOfBirth.set(1985, 10, 24);
 		person.setFamilyName("Rooney");

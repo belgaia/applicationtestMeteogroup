@@ -6,7 +6,7 @@
         <pathsSet class="linked-hash-set">
           <string>WEB-INF/web.xml</string>
           <string>WEB-INF/classes/applicationtest/MeteoGroupService.class</string>
-          <string>WEB-INF/classes/applicationtest/PersonBean.class</string>
+          <string>WEB-INF/classes/applicationtest/Person.class</string>
           <string>WEB-INF/classes/person.xsd</string>
           <string>WEB-INF/lib/jsr311-api-1.1.1.jar</string>
           <string>WEB-INF/lib/javax.ejb-api-3.2.jar</string>

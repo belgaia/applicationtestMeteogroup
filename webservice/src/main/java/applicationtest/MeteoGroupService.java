@@ -14,12 +14,12 @@ import org.apache.log4j.Logger;
  * @author Isabel Schaefer Batista
  *
  */
-@Path("/persons")
+@Path("person")
 @Stateless
 public class MeteoGroupService {
 
 	@EJB
-	private PersonBean personBean;
+	private Person person;
 	
 	private static final Logger LOGGER = Logger.getLogger(MeteoGroupService.class);
 	
@@ -33,9 +33,11 @@ public class MeteoGroupService {
 	// FIXME: running in tomcat does not work properly (request of above URL brings up 404 error)
 	@GET
 	@Produces({"application/xml", "application/json"})
-	@Path("person/{id}")
-	public String getPerson(@PathParam("id") String id) {
-		LOGGER.info("Has to be implemented.");		
-		return personBean.getFamilyName();
+	@Path("/{id}")
+	public Person getPerson(@PathParam("id") String id) {
+		LOGGER.info("Has to be implemented.");
+		Person person = new Person();
+		person.setFamilyName("Mustermann");
+		return person;
 	}	
 }
