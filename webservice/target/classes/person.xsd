@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="person">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="placeOfBirth" type="xs:string" nillable="true"/>
+                <xs:element name="height" type="xs:float" nillable="true"/>
+                <xs:element name="familyName" type="xs:string"/>
+                <xs:element name="givenName" type="xs:string"/>
+                <xs:element name="middleNames" type="xs:string" nillable="true"/>
+                <xs:element name="twitterId" type="xs:string"/>
+                <xs:element name="dateOfDeath" type="xs:date"/>
+                <xs:element name="dateOfBirth" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
