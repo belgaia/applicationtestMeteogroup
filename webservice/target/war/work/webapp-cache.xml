@@ -14,8 +14,6 @@
           <string>WEB-INF/classes/person-2.xml</string>
           <string>WEB-INF/classes/person-3.xml</string>
           <string>WEB-INF/classes/person.xsd</string>
-          <string>WEB-INF/classes/persondata.xml</string>
-          <string>WEB-INF/classes/restclient.js</string>
           <string>WEB-INF/lib/persistence-0.0.1-SNAPSHOT.jar</string>
           <string>WEB-INF/lib/mongo-java-driver-2.10.1.jar</string>
           <string>WEB-INF/lib/log4j-1.2.17.jar</string>

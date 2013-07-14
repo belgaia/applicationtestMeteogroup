@@ -92,21 +92,21 @@ public class MeteoGroupService extends javax.ws.rs.core.Application {
 		return Response.ok(entity).build();
 	}
 
-	private void sendPersonToDatabase(Person personToPersist)
-			throws UnknownHostException {
+	private void sendPersonToDatabase(Person personToPersist) throws UnknownHostException {
+		
 		final PersonPersistence persistence = new PersonPersistence();
-		PersonBean personBeanToPersist = convertToPersonBean(personToPersist);
-		BasicDBObject dbPerson = persistence
-				.createNewPerson(personBeanToPersist);
+		final PersonBean personBeanToPersist = convertToPersonBean(personToPersist);
+		final BasicDBObject dbPerson = persistence.createNewPerson(personBeanToPersist);
+		
 		if (dbPerson != null) {
-			System.out.println("Successfully persisted person: "
-					+ personToPersist.getId());
+			LOGGER.info("DB Create :: Successfully persisted person :: " + personToPersist.getId());
 		}
+		
 	}
 
 	private Person getPersonFromDatabase(String id) throws UnknownHostException, PersonNotFoundException {
 		final PersonPersistence persistence = new PersonPersistence();
-		PersonBean personFromDb = persistence.getPersonById(id);
+		final PersonBean personFromDb = persistence.getPersonById(id);
 		return convertToPersonForService(personFromDb);
 	}
 

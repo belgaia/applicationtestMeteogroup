@@ -12,6 +12,12 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 
+/**
+ * Class for the connection to a MongoDB nosql database.
+ * @author WeatherGirl
+ *
+ */
+// TODO: move database name to PersonPersistence class (not only a MongoDB information)
 public class MongoDBConnector {
 
 	public static final String DB_NAME = "meteogroup";
@@ -42,11 +48,6 @@ public class MongoDBConnector {
 		return mongoDbConnectorInstance;
 	}
 
-	private List<String> getAllDatabases() {
-
-		return mongo.getDatabaseNames();
-
-	}
 
 	/**
 	 * Returns the existing or newly created database with the given database name for further usage.
@@ -96,7 +97,7 @@ public class MongoDBConnector {
 			try {
 				while (cursor.hasNext()) {
 					foundDocument = cursor.next();
-					System.out.println(foundDocument);
+					LOGGER.info("DB search :: Found document :: Collection=" + collectionName + " :: fieldIdentifier= " + fieldIdentifier + " :: fieldValue= " + fieldValue);
 				}
 			} finally {
 				cursor.close();
@@ -120,5 +121,11 @@ public class MongoDBConnector {
 		DBCollection collection = database.getCollection(collectionName);
 		collection.insert(objectToPersist);
 		
+	}
+	
+	private List<String> getAllDatabases() {
+
+		return mongo.getDatabaseNames();
+
 	}
 }

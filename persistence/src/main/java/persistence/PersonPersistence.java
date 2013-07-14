@@ -18,10 +18,21 @@ public class PersonPersistence {
 	
 	private static MongoDBConnector mongoDBConnector = MongoDBConnector.getInstance();
 
+	/**
+	 * Find person by id in the used storage.
+	 * @param personId	The person id to find person data in the storage.
+	 * @return			The person object found in the storage.
+	 * @throws UnknownHostException		If the used storage cannot be found at the server.
+	 * @throws PersonNotFoundException	If the person can not be found in the storage.
+	 */
 	public PersonBean getPersonById(String personId) throws UnknownHostException, PersonNotFoundException {
+		
+		LOGGER.info("DB Search :: Find person :: " + personId);
+		
 		DBObject foundDBPerson = mongoDBConnector.find(COLLECTION_NAME, "id", personId);
 		if (foundDBPerson == null) {
-			throw new PersonNotFoundException("Person does not exist.", 404);
+			LOGGER.error("DB Search :: Could not find person :: " + personId);
+			throw new PersonNotFoundException("Person does not exist: " + personId);
 		}
 		return convertToPersonBean(foundDBPerson);
 	}
@@ -34,6 +45,8 @@ public class PersonPersistence {
 	 * @throws UnknownHostException
 	 */
 	public BasicDBObject createNewPerson(PersonBean personToPersist) throws UnknownHostException {
+
+		LOGGER.info("DB Create :: Create new person :: " + personToPersist.getId());
 
 		BasicDBObject document = convertToDbDocument(personToPersist);
 		mongoDBConnector.createDocument(COLLECTION_NAME, document);
@@ -72,26 +85,5 @@ public class PersonPersistence {
 		person.setTwitterId((String) personFromDatabase.get("twitterId"));
 
 		return person;
-	}
-
-	public static void main(String[] args) {
-
-		PersonPersistence persistence = new PersonPersistence();
-
-		PersonBean personToPersist = new PersonBean();
-		personToPersist.setFamilyName("Batista");
-
-		BasicDBObject storedPerson;
-		try {
-			storedPerson = persistence.createNewPerson(personToPersist);
-			if (storedPerson != null) {
-				System.out.println("Person stored.");
-			} else {
-				System.out.println("Error occurred during processing.");
-			}
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }
