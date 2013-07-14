@@ -7,7 +7,8 @@ Deployment description:
 1. Build project
 2. Get the project/webservice/target/meteogroupService.war and deploy it to an application-server (e.g. Glassfish 3)
 3. Service available under base URI http://[servername]:[port]/meteogroupService/meteogroup
-3. Check the following URIs
+4. Install MongoDb on your system (used for persistence)
+5. Check the following URIs
 
 Create a new person
 -------------------
