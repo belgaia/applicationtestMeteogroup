@@ -3,6 +3,8 @@ package persistence;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -10,16 +12,41 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 
+// TODO: make Singleton
 public class MongoDBConnector {
 
 	public static final String DB_NAME = "meteogroup";
 	public static final String COLLECTION_NAME = "persons";
+	
+	private static final Logger LOGGER = Logger.getLogger(MongoDBConnector.class);
+	private static final String SERVER_URL = "localhost";
+	private static final int PORT_NUMBER = 27017;
 
 	private Mongo mongo;
+	private static MongoDBConnector mongoDbConnectorInstance;
+	
+	private MongoDBConnector() {
+		
+		if(mongo == null) {
+			try {
+				mongo = new Mongo(SERVER_URL, PORT_NUMBER);
+			} catch (UnknownHostException e) {
+				LOGGER.error("DBConnection :: UnknownHostException :: " + e.getMessage() + " :: " + SERVER_URL + ":" + PORT_NUMBER);
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static MongoDBConnector getInstance() {
+		if (mongoDbConnectorInstance == null) {
+			mongoDbConnectorInstance = new MongoDBConnector();
+		}
+		return mongoDbConnectorInstance;
+	}
 
 	public void setUp() throws UnknownHostException {
 
-		mongo = new Mongo("localhost", 27017);
+		mongo = new Mongo(SERVER_URL, PORT_NUMBER);
 	}
 
 	public List<String> getAllDatabases() {

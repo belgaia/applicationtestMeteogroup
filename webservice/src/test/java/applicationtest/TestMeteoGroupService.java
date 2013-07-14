@@ -16,16 +16,17 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
+/**
+ * Integration test for the methods of the meteoGroup person service.
+ * @author WeatherGirl
+ *
+ */
 public class TestMeteoGroupService {
 
 	private static final String BASE_URI = "http://localhost:8080/meteogroupService";
 	private static final Logger LOGGER = Logger.getLogger(TestMeteoGroupService.class);
-
-	
+			
 	private WebResource service;
-	
-//	@Autowired
-//	private RestTemplate restTemplate;
 	
 	@Before
 	public void setUp() {
@@ -48,7 +49,7 @@ public class TestMeteoGroupService {
 		final String personId = "1";
 		Person foundPerson = service.path("meteogroup").path("person/" + personId).accept(MediaType.APPLICATION_XML).get(Person.class);
 		
-		assertEquals("Mustermann", foundPerson.getFamilyName());
+		assertEquals("Rooney", foundPerson.getFamilyName());
 	}
 	
 	// TODO: implement
@@ -71,23 +72,8 @@ public class TestMeteoGroupService {
 			System.out.println("Not reachable");
 		}
 		
-//		
-//		Person person = new Person();
-//		person.setFamilyName("Batista");
 		Person createdPerson = service.path("meteogroup").path("person").type(MediaType.APPLICATION_XML).post(Person.class, person);
-//		ClientResponse response = service.path("meteogroup").path("person").type(MediaType.APPLICATION_XML).post(ClientResponse.class);
-		
-//		service.path("meteogroup").path("person").path("/").type(MediaType.APPLICATION_XML).post();
-		
-//		System.out.println("Reason: " + response.getEntity(String.class));
-		
-		
-		
-//		System.out.println(service.path("meteogroup").path("person").type(MediaType.APPLICATION_XML).post(ClientResponse.class));
-//		throw new UniformInterfaceException(response.getEntity(String.class));
-		
-//		System.out.println(service.path("meteogroup").path("person/").accept(MediaType.APPLICATION_XML).get(ClientResponse.class).toString());
-//		assertEquals(200, response.getClientResponseStatus().getStatusCode());
+		assertEquals(200, response.getClientResponseStatus().getStatusCode());
 		
 	}
 }

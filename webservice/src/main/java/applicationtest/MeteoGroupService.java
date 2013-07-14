@@ -23,7 +23,7 @@ import persistence.PersonPersistence;
 import com.mongodb.BasicDBObject;
 
 /**
- * RESTful service class for getting and posting person data.
+ * RESTful service class for finding and creating person data.
  * 
  * @author Isabel Schaefer Batista
  * 
@@ -35,27 +35,26 @@ public class MeteoGroupService extends javax.ws.rs.core.Application {
 	@EJB
 	private Person person;
 
-	private static final Logger LOGGER = Logger
-			.getLogger(MeteoGroupService.class);
+	private static final Logger LOGGER = Logger.getLogger(MeteoGroupService.class);
 
 	/**
 	 * Get person data by given ID via RESTful service call Usage:
-	 * servername:port/meteogroup/persons/person/{id}
+	 * servername:port/meteogroupService/meteogroup/person/{id}
 	 * 
-	 * @param id
-	 *            The unique ID of the person to get the data.
-	 * @return XML or JSON request with detailed information about the person.
+	 * @param personId	The unique ID of the person to get the data.
+	 * @return XML or JSON response with detailed information about the person.
 	 */
-	// TODO: response has to be XML/JSON object not just the familyName
 	@GET
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Path("/{id}")
-	public Person getPerson(@PathParam("id") String id) {
-		LOGGER.info("Get person with id: " + id);
+	public Response getPerson(@PathParam("id") String personId) {
+		
+		LOGGER.info("Request :: Resource person :: GET :: " + personId);
 
 		Person person = null;
 		try {
-			person = getPersonFromDatabase(id);
+			
+			person = getPersonFromDatabase(personId);
 			
 			if (person != null) {
 				System.out.println("Person found!");
@@ -63,18 +62,11 @@ public class MeteoGroupService extends javax.ws.rs.core.Application {
 				System.out.println("Person not found!");
 			}
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			LOGGER.error("Exeption :: );
+			return Response.serverError().build();
 		}
 
-		// if (id.equals("1")) {
-		// person.setFamilyName("Mustermann");
-		// } else {
-		// person.setFamilyName("Unknown");
-		// ClientResponse.Status status = ClientResponse.Status.NOT_FOUND;
-		// }
-
-		return person;
+		return Response.ok(person).build();
 	}
 
 	@POST

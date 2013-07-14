@@ -3,6 +3,8 @@ package persistence;
 import java.net.UnknownHostException;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -10,16 +12,15 @@ import com.mongodb.DBObject;
 
 public class PersonPersistence {
 
-	// private static final String PERSON_DB_NAME = "persons";
-
-	private MongoDBConnector mongoDBConnector;
+	private static Logger LOGGER = Logger.getLogger(PersonPersistence.class);
+	
+	private static MongoDBConnector mongoDBConnector;
 
 	private void setUp() {
-		mongoDBConnector = new MongoDBConnector();
+		mongoDBConnector = MongoDBConnector.getInstance();
 	}
 
-	public PersonBean getPersonById(String personId)
-			throws UnknownHostException {
+	public PersonBean getPersonById(String personId) throws UnknownHostException {
 		setUp();
 		DBObject foundDBPerson = mongoDBConnector.findById(personId);
 		return convertToPersonBean(foundDBPerson);
