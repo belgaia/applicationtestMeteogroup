@@ -29,9 +29,11 @@ public class TestMeteoGroupService {
 	
 	@Before
 	public void setUp() {
+		LOGGER.info("Configure RESTful service client for integrationtests");
 		ClientConfig config = new DefaultClientConfig();
 	    Client client = Client.create(config);
 	    service = client.resource(UriBuilder.fromUri(BASE_URI).build());
+	    LOGGER.info("Successfully established connection to base URI: " + BASE_URI);
 	}
 	
 	/**
@@ -39,8 +41,11 @@ public class TestMeteoGroupService {
 	 */
 	@Test
 	public void getPersonByIdWithSuccess() {
-		
+
 		final String personId = "1";
+
+		LOGGER.info("Test response status of method request get person by id " + personId);
+		
 		ClientResponse response = service.path("meteogroup").path("person/" + personId).accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
 		assertEquals(200, response.getClientResponseStatus().getStatusCode());
 		
@@ -52,6 +57,9 @@ public class TestMeteoGroupService {
 	@Test
 	public void getPersonByIdWithSuccessAndCorrectResult() {
 		final String personId = "1";
+		
+		LOGGER.info("Test response result of method request get person by id " + personId);
+
 		Person foundPerson = service.path("meteogroup").path("person/" + personId).accept(MediaType.APPLICATION_XML).get(Person.class);
 		
 		assertEquals("Rooney", foundPerson.getFamilyName());
@@ -63,6 +71,9 @@ public class TestMeteoGroupService {
 	@Test
 	public void getPersonByIdThatDoesNotExist() {
 		final String personId = "100";
+		
+		LOGGER.info("Test response status of method request get person by id if id does not exist: " + personId);
+
 		ClientResponse response = service.path("meteogroup").path("person/" + personId).accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
 		
 		assertEquals(404, response.getClientResponseStatus().getStatusCode());
@@ -73,6 +84,9 @@ public class TestMeteoGroupService {
 	 */
 	@Test
 	public void createNewPerson() {
+		
+		LOGGER.info("Test response status and result for request on create person method");
+
 		Person person = new Person();
 		person.setId("9999");
 		person.setFamilyName("Mustermann");

@@ -84,13 +84,11 @@ public class MeteoGroupService extends javax.ws.rs.core.Application {
 		try {
 			sendPersonToDatabase(generatedPerson);
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
+			LOGGER.error("DBConnection :: Create person failed :: " + e.getMessage());
 			e.printStackTrace();
 		}
 
-		GenericEntity<Person> entity = new GenericEntity<Person>(
-				generatedPerson) {
-		};
+		GenericEntity<Person> entity = new GenericEntity<Person>(generatedPerson) {};
 		return Response.ok(entity).build();
 	}
 
