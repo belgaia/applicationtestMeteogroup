@@ -7,6 +7,11 @@ import javax.ejb.Singleton;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
+/**
+ * Bean for the person resource of the RESTful service.
+ * @author Isabel Schaefer Batista
+ *
+ */
 @Singleton
 @XmlRootElement(name="person")
 public class Person {

@@ -14,7 +14,7 @@ import com.mongodb.Mongo;
 
 /**
  * Class for the connection to a MongoDB nosql database.
- * @author WeatherGirl
+ * @author Isabel Schaefer Batista
  *
  */
 // TODO: move database name to PersonPersistence class (not only a MongoDB information)

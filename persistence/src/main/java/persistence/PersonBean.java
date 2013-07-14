@@ -4,6 +4,11 @@ import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * Bean for mapping the person object for database storage.
+ * @author Isabel Schaefer Batista
+ *
+ */
 public class PersonBean {
 
 	private String id;

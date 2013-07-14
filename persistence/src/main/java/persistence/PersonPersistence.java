@@ -10,6 +10,11 @@ import com.mongodb.DBObject;
 
 import exceptions.PersonNotFoundException;
 
+/**
+ * Class for all operations to create and find persons in a storage.
+ * @author Isabel Schaefer Batista
+ *
+ */
 public class PersonPersistence {
 
 	private static Logger LOGGER = Logger.getLogger(PersonPersistence.class);
