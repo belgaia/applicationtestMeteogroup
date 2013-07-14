@@ -6,8 +6,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 
-import applicationtest.Person;
-
 public class PersonPersistence {
 	
 	private static final String PERSON_DB_NAME = "persons";
@@ -17,13 +15,13 @@ public class PersonPersistence {
 		mongoDBConnector = new MongoDBConnector();
 	}
 		
-	public Person getPersonById() {
+	public PersonBean getPersonById() {
 		mongoDBConnector.getAllDatabases();
 		
 		return null;
 	}
 
-	public BasicDBObject createNewPerson(Person personToPersist) throws UnknownHostException {
+	public BasicDBObject createNewPerson(PersonBean personToPersist) throws UnknownHostException {
 		
 		setUp();
 		
@@ -50,7 +48,7 @@ public class PersonPersistence {
 		
 		PersonPersistence persistence = new PersonPersistence();
 		
-		Person personToPersist = new Person();
+		PersonBean personToPersist = new PersonBean();
 		personToPersist.setFamilyName("Batista");
 		
 		BasicDBObject storedPerson;

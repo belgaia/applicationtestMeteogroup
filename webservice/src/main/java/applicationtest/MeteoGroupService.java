@@ -1,10 +1,5 @@
 package applicationtest;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -19,10 +14,6 @@ import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBElement;
 
 import org.apache.log4j.Logger;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 import com.sun.jersey.api.client.ClientResponse;
 

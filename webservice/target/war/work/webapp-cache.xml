@@ -15,6 +15,9 @@
           <string>WEB-INF/classes/person.xsd</string>
           <string>WEB-INF/classes/persondata.xml</string>
           <string>WEB-INF/classes/restclient.js</string>
+          <string>WEB-INF/lib/persistence-0.0.1-SNAPSHOT.jar</string>
+          <string>WEB-INF/lib/mongo-java-driver-2.10.1.jar</string>
+          <string>WEB-INF/lib/log4j-1.2.17.jar</string>
           <string>WEB-INF/lib/jsr311-api-1.1.1.jar</string>
           <string>WEB-INF/lib/jboss-ejb-api_3.1_spec-1.0.2.Final.jar</string>
           <string>WEB-INF/lib/spring-web-3.0.0.RELEASE.jar</string>
@@ -40,12 +43,23 @@
           <string>WEB-INF/lib/jackson-mapper-asl-1.7.1.jar</string>
           <string>WEB-INF/lib/jackson-jaxrs-1.7.1.jar</string>
           <string>WEB-INF/lib/jackson-xc-1.7.1.jar</string>
-          <string>WEB-INF/lib/log4j-1.2.17.jar</string>
         </pathsSet>
       </path-set>
     </entry>
   </registeredFiles>
   <dependenciesInfo>
+    <org.apache.maven.plugin.war.util.DependencyInfo>
+      <dependency>
+        <groupId>com.meteogroup</groupId>
+        <artifactId>persistence</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <type>jar</type>
+        <scope>compile</scope>
+        <exclusions/>
+        <optional>false</optional>
+      </dependency>
+      <targetFileName>persistence-0.0.1-SNAPSHOT.jar</targetFileName>
+    </org.apache.maven.plugin.war.util.DependencyInfo>
     <org.apache.maven.plugin.war.util.DependencyInfo>
       <dependency>
         <groupId>javax.ws.rs</groupId>
