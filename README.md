@@ -4,6 +4,7 @@ applicationtestMeteogroup
 RESTful webservice to find and create person data.
 
 Deployment description:
+
 1. Build project
 2. Get the project/webservice/target/meteogroupService.war and deploy it to an application-server (e.g. Glassfish 3)
 3. Service available under base URI http://[servername]:[port]/meteogroupService/meteogroup
