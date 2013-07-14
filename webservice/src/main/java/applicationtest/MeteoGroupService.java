@@ -21,12 +21,12 @@ import persistence.PersonBean;
 import persistence.PersonPersistence;
 
 import com.mongodb.BasicDBObject;
-import com.sun.jersey.api.client.ClientResponse;
 
 /**
  * RESTful service class for getting and posting person data.
+ * 
  * @author Isabel Schaefer Batista
- *
+ * 
  */
 @Path("person")
 @Stateless
@@ -34,39 +34,54 @@ public class MeteoGroupService extends javax.ws.rs.core.Application {
 
 	@EJB
 	private Person person;
-	
-	private static final Logger LOGGER = Logger.getLogger(MeteoGroupService.class);
-	
+
+	private static final Logger LOGGER = Logger
+			.getLogger(MeteoGroupService.class);
+
 	/**
-	 * Get person data by given ID via RESTful service call
-	 * Usage: servername:port/meteogroup/persons/person/{id}
-	 * @param id The unique ID of the person to get the data.
+	 * Get person data by given ID via RESTful service call Usage:
+	 * servername:port/meteogroup/persons/person/{id}
+	 * 
+	 * @param id
+	 *            The unique ID of the person to get the data.
 	 * @return XML or JSON request with detailed information about the person.
 	 */
 	// TODO: response has to be XML/JSON object not just the familyName
 	@GET
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Path("/{id}")
 	public Person getPerson(@PathParam("id") String id) {
 		LOGGER.info("Get person with id: " + id);
-		
-		Person person = new Person();
-		
-		if (id.equals("1")) {
-			person.setFamilyName("Mustermann");
-		} else {
-			person.setFamilyName("Unknown");
-			ClientResponse.Status status = ClientResponse.Status.NOT_FOUND;
+
+		Person person = null;
+		try {
+			person = getPersonFromDatabase(id);
+			
+			if (person != null) {
+				System.out.println("Person found!");
+			} else {
+				System.out.println("Person not found!");
+			}
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
+
+		// if (id.equals("1")) {
+		// person.setFamilyName("Mustermann");
+		// } else {
+		// person.setFamilyName("Unknown");
+		// ClientResponse.Status status = ClientResponse.Status.NOT_FOUND;
+		// }
+
 		return person;
 	}
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Response createPerson(JAXBElement<Person> personXml) {
-		
+
 		Person generatedPerson = personXml.getValue();
 		try {
 			sendPersonToDatabase(generatedPerson);
@@ -74,22 +89,33 @@ public class MeteoGroupService extends javax.ws.rs.core.Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		GenericEntity<Person> entity = new GenericEntity<Person>(generatedPerson) {};
-		return Response.ok(entity).build();
-	}	
 
-	private void sendPersonToDatabase(Person personToPersist) throws UnknownHostException {
+		GenericEntity<Person> entity = new GenericEntity<Person>(
+				generatedPerson) {
+		};
+		return Response.ok(entity).build();
+	}
+
+	private void sendPersonToDatabase(Person personToPersist)
+			throws UnknownHostException {
 		final PersonPersistence persistence = new PersonPersistence();
 		PersonBean personBeanToPersist = convertToPersonBean(personToPersist);
-		BasicDBObject dbPerson = persistence.createNewPerson(personBeanToPersist);
-		if(dbPerson != null) {
-			System.out.println("Successfully persisted person: " + personToPersist.getId());
+		BasicDBObject dbPerson = persistence
+				.createNewPerson(personBeanToPersist);
+		if (dbPerson != null) {
+			System.out.println("Successfully persisted person: "
+					+ personToPersist.getId());
 		}
 	}
 
+	private Person getPersonFromDatabase(String id) throws UnknownHostException {
+		final PersonPersistence persistence = new PersonPersistence();
+		PersonBean personFromDb = persistence.getPersonById(id);
+		return convertToPersonForService(personFromDb);
+	}
+
 	private PersonBean convertToPersonBean(Person personToPersist) {
-		
+
 		// TODO: make this with Reflection to avoid errors and maintenance
 		PersonBean personBean = new PersonBean();
 		personBean.setId(personToPersist.getId());
@@ -102,5 +128,21 @@ public class MeteoGroupService extends javax.ws.rs.core.Application {
 		personBean.setPlaceOfBirth(personToPersist.getPlaceOfBirth());
 		personBean.setTwitterId(personToPersist.getTwitterId());
 		return personBean;
+	}
+
+	private Person convertToPersonForService(PersonBean personFromDb) {
+
+		// TODO: make this with Reflection to avoid errors and maintenance
+		Person personForService = new Person();
+		personForService.setId(personFromDb.getId());
+		personForService.setGivenName(personFromDb.getGivenName());
+		personForService.setFamilyName(personFromDb.getFamilyName());
+		personForService.setMiddleNames(personFromDb.getMiddleNames());
+		personForService.setDateOfBirth(personFromDb.getDateOfBirth());
+		personForService.setDateOfDeath(personFromDb.getDateOfDeath());
+		personForService.setHeight(personFromDb.getHeight());
+		personForService.setPlaceOfBirth(personFromDb.getPlaceOfBirth());
+		personForService.setTwitterId(personFromDb.getTwitterId());
+		return personForService;
 	}
 }
