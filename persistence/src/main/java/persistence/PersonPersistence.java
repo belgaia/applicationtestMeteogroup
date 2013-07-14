@@ -6,40 +6,38 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
+
+import exceptions.PersonNotFoundException;
 
 public class PersonPersistence {
 
 	private static Logger LOGGER = Logger.getLogger(PersonPersistence.class);
 	
-	private static MongoDBConnector mongoDBConnector;
+	private static final String COLLECTION_NAME = "persons";
+	
+	private static MongoDBConnector mongoDBConnector = MongoDBConnector.getInstance();
 
-	private void setUp() {
-		mongoDBConnector = MongoDBConnector.getInstance();
-	}
-
-	public PersonBean getPersonById(String personId) throws UnknownHostException {
-		setUp();
-		DBObject foundDBPerson = mongoDBConnector.findById(personId);
+	public PersonBean getPersonById(String personId) throws UnknownHostException, PersonNotFoundException {
+		DBObject foundDBPerson = mongoDBConnector.find(COLLECTION_NAME, "id", personId);
+		if (foundDBPerson == null) {
+			throw new PersonNotFoundException("Person does not exist.", 404);
+		}
 		return convertToPersonBean(foundDBPerson);
 	}
 
-	public BasicDBObject createNewPerson(PersonBean personToPersist)
-			throws UnknownHostException {
+	/**
+	 * Inserts a new person (defined by the parameter object) to the collection "persons" of the
+	 * meteogroup database.
+	 * @param personToPersist	Person information to store in a new document.
+	 * @return					New created MongoDB document with person information.
+	 * @throws UnknownHostException
+	 */
+	public BasicDBObject createNewPerson(PersonBean personToPersist) throws UnknownHostException {
 
-		setUp();
-
-		DB database = mongoDBConnector
-				.getOrCreateDatabase(MongoDBConnector.DB_NAME);
-		System.out.println("database: " + database);
-
-		DBCollection collection = database
-				.getCollection(MongoDBConnector.COLLECTION_NAME);
 		BasicDBObject document = convertToDbDocument(personToPersist);
+		mongoDBConnector.createDocument(COLLECTION_NAME, document);
 
-		collection.insert(document);
 		return document;
 	}
 

@@ -7,7 +7,6 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.apache.log4j.Logger;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sun.jersey.api.client.Client;
@@ -35,6 +34,9 @@ public class TestMeteoGroupService {
 	    service = client.resource(UriBuilder.fromUri(BASE_URI).build());
 	}
 	
+	/**
+	 * Tests the response status if a person with given id can be found.
+	 */
 	@Test
 	public void getPersonByIdWithSuccess() {
 		
@@ -44,6 +46,9 @@ public class TestMeteoGroupService {
 		
 	}
 	
+	/**
+	 * Tests the result if a person with given id can be found.
+	 */
 	@Test
 	public void getPersonByIdWithSuccessAndCorrectResult() {
 		final String personId = "1";
@@ -52,28 +57,30 @@ public class TestMeteoGroupService {
 		assertEquals("Rooney", foundPerson.getFamilyName());
 	}
 	
-	// TODO: implement
+	/**
+	 * Tests method to get a person with given id if the id does not exist.
+	 */
 	@Test
-	@Ignore
 	public void getPersonByIdThatDoesNotExist() {
+		final String personId = "100";
+		ClientResponse response = service.path("meteogroup").path("person/" + personId).accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
 		
+		assertEquals(404, response.getClientResponseStatus().getStatusCode());
 	}
 	
+	/**
+	 * Tests creating a new person. Tests if response status and result are correct.
+	 */
 	@Test
 	public void createNewPerson() {
 		Person person = new Person();
-		person.setFamilyName("Batista");
+		person.setId("9999");
+		person.setFamilyName("Mustermann");
 		ClientResponse response = service.path("meteogroup").path("person").accept(MediaType.APPLICATION_XML).post(ClientResponse.class, person);
-		System.out.println("Status: " + response.getStatus());
-		
-		if(response.hasEntity()) {
-			System.out.println("Has entity: " + response.getEntity(String.class));
-		} else {
-			System.out.println("Not reachable");
-		}
-		
+			
 		Person createdPerson = service.path("meteogroup").path("person").type(MediaType.APPLICATION_XML).post(Person.class, person);
 		assertEquals(200, response.getClientResponseStatus().getStatusCode());
+		assertEquals("Mustermann", createdPerson.getFamilyName());
 		
-	}
+	}	
 }

@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.xml.bind.JAXBElement;
 
 import org.apache.log4j.Logger;
@@ -21,6 +22,8 @@ import persistence.PersonBean;
 import persistence.PersonPersistence;
 
 import com.mongodb.BasicDBObject;
+
+import exceptions.PersonNotFoundException;
 
 /**
  * RESTful service class for finding and creating person data.
@@ -44,6 +47,7 @@ public class MeteoGroupService extends javax.ws.rs.core.Application {
 	 * @param personId	The unique ID of the person to get the data.
 	 * @return XML or JSON response with detailed information about the person.
 	 */
+	// TODO: sort the result set so each field is printed at the same position
 	@GET
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Path("/{id}")
@@ -56,14 +60,16 @@ public class MeteoGroupService extends javax.ws.rs.core.Application {
 			
 			person = getPersonFromDatabase(personId);
 			
-			if (person != null) {
-				System.out.println("Person found!");
-			} else {
-				System.out.println("Person not found!");
+			if (person == null) {
+				
+				return Response.status(Status.NOT_FOUND).build();
 			}
 		} catch (UnknownHostException e) {
-//			LOGGER.error("Exeption :: );
-			return Response.serverError().build();
+			LOGGER.error("DBConnection :: Unknown Host Exception :: Connection cannot be established");
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		} catch (PersonNotFoundException e) {
+			LOGGER.error("GET person by Id :: 404 Person not found :: " + personId);
+			return Response.status(Status.NOT_FOUND).build();
 		}
 
 		return Response.ok(person).build();
@@ -100,7 +106,7 @@ public class MeteoGroupService extends javax.ws.rs.core.Application {
 		}
 	}
 
-	private Person getPersonFromDatabase(String id) throws UnknownHostException {
+	private Person getPersonFromDatabase(String id) throws UnknownHostException, PersonNotFoundException {
 		final PersonPersistence persistence = new PersonPersistence();
 		PersonBean personFromDb = persistence.getPersonById(id);
 		return convertToPersonForService(personFromDb);
